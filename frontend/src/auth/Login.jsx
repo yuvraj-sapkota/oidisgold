@@ -94,7 +94,7 @@ const Login = () => {
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-customBlue hover:bg-customBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-customBlue"
             >
-              Sign in
+              Log in
             </button>
           </form>
 
@@ -102,7 +102,7 @@ const Login = () => {
             Don't have an account?
             <Link
               to="/signup"
-              className="font-medium text-[#2D3B45] hover:text-[#3D4D59]"
+              className="font-medium text-[#2D3B45] hover:text-[#3D4D59] ml-2"
             >
               Sign up
             </Link>

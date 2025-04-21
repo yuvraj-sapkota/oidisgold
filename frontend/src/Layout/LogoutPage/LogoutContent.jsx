@@ -33,7 +33,7 @@ const LogoutContent = () => {
             </div>
           </div>
           <div className="text-center">
-            <button className="px-16 py-2 bg-customBlue text-white font-bold rounded-lg mt-8">
+            <button className="px-6 sm:px-12 md:px-16 py-2 bg-customBlue text-white font-bold rounded-lg mt-8">
               Get Started
             </button>
           </div>

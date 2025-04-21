@@ -135,7 +135,7 @@ const Signup = () => {
             Already have an account?
             <Link
               to="/login"
-              className="font-medium text-[#2D3B45] hover:text-[#3D4D59]"
+              className="font-medium text-[#2D3B45] hover:text-[#3D4D59] ml-2"
             >
               Login
             </Link>
