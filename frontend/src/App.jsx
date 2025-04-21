@@ -7,6 +7,8 @@ import Signup from "./auth/Signup";
 import HomeHero from "./Layout/LogoutPage/LogoutContent";
 import HeadingOIG from "./components/Logo";
 import Logout from "./pages/Logout";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
             <Route path="/" element={<Logout />} />
             <Route path="/login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="home" element={<HomePage />} />
             <Route path="adminPage" element={<AdminPage />} />
           </Route>
         </Routes>
