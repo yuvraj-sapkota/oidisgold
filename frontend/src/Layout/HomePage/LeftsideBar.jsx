@@ -3,7 +3,9 @@ import Logo from "../../components/Logo";
 import { useState } from "react";
 
 const LeftSidebar = () => {
-  const sem = ["1st Semester", "2nd Semester"];
+  const sem = ["1st Semester", "2nd Semester", "3rd Semester", "4th Semester"];
+
+  const [semester, setSemester] = useState([]);
   const [isSemester, setIsSemester] = useState(true);
   return (
     <>
@@ -40,11 +42,11 @@ const LeftSidebar = () => {
                 {sem.map((curElem, index) => (
                   <div
                     key={index}
-                    className={`flex items-center justify-between p-2 bg-[#3D4D59] hover:bg-[#42515b] hover:scale-105 will-change-transform duration-200 transition rounded cursor-pointer  
+                    className={`flex items-center justify-between p-2 bg-[#3D4D59] hover:bg-[#42515b] hover:scale-105 will-change-transform duration-200 transition rounded cursor-pointer   
                      
                     }`}
                   >
-                    <div className="flex items-center gap-3 w-full ">
+                    <div className="flex items-center gap-3 w-full">
                       <span className="text-sm">
                         <Play size={15} />
                       </span>
