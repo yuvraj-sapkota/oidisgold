@@ -4,8 +4,6 @@ import { useState } from "react";
 
 const LeftSidebar = () => {
   const sem = ["1st Semester", "2nd Semester", "3rd Semester", "4th Semester"];
-
-  const [semester, setSemester] = useState([]);
   const [isSemester, setIsSemester] = useState(true);
   return (
     <>

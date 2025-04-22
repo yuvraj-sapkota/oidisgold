@@ -3,8 +3,6 @@ const Subject = require("../models/Subject");
 
 exports.createSubject = async (req, res) => {
   try {
-    // const { name, semester } = req.body;
-    // const newSubject = new Subject({name, semester});
     const newSubject = new Subject(req.body);
     await newSubject.save();
     res.status(201).json(newSubject);
