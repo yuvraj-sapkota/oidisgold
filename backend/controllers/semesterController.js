@@ -1,5 +1,5 @@
 // controllers/semesterController.js
-const Semester = require("../models/Semester");
+const Semester = require("../models/semester");
 
 exports.createSemester = async (req, res) => {
   try {

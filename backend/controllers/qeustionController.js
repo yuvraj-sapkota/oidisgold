@@ -1,5 +1,5 @@
 // controllers/questionController.js
-const Question = require("../models/Question");
+const Question = require("../models/question");
 
 exports.createQuestion = async (req, res) => {
   try {
@@ -7,17 +7,22 @@ exports.createQuestion = async (req, res) => {
     await newQuestion.save();
     res.status(201).json(newQuestion);
   } catch (err) {
-    res.status(500).json({ message: "Error creating question", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Error creating question", error: err.message });
   }
 };
 
 exports.getQuestionsBySubject = async (req, res) => {
   try {
     const { subjectId } = req.params;
-    const questions = await Question.find({ subject: subjectId });
+    const questions = await Question.find(filters).populate("subject");
+
     res.status(200).json(questions);
   } catch (err) {
-    res.status(500).json({ message: "Error fetching questions", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Error fetching questions", error: err.message });
   }
 };
 
@@ -33,17 +38,23 @@ exports.getQuestionsBySubjectAndFilter = async (req, res) => {
     const questions = await Question.find(filters);
     res.status(200).json(questions);
   } catch (err) {
-    res.status(500).json({ message: "Error filtering questions", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Error filtering questions", error: err.message });
   }
 };
 
 exports.updateQuestion = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedQuestion = await Question.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedQuestion = await Question.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     res.status(200).json(updatedQuestion);
   } catch (err) {
-    res.status(500).json({ message: "Error updating question", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Error updating question", error: err.message });
   }
 };
 
@@ -53,6 +64,8 @@ exports.deleteQuestion = async (req, res) => {
     await Question.findByIdAndDelete(id);
     res.status(200).json({ message: "Question deleted" });
   } catch (err) {
-    res.status(500).json({ message: "Error deleting question", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Error deleting question", error: err.message });
   }
 };

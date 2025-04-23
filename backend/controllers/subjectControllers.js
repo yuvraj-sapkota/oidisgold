@@ -1,10 +1,13 @@
 // controllers/subjectController.js
-const Subject = require("../models/Subject");
+const Subject = require("../models/subject");
 
 exports.createSubject = async (req, res) => {
   try {
     const newSubject = new Subject(req.body);
+
+    console.log(subject);
     await newSubject.save();
+    const populatedSubject = await Subject.findById(newSubject._id).populate("semester");
     res.status(201).json(newSubject);
   } catch (err) {
     res

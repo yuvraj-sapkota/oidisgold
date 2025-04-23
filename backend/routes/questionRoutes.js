@@ -5,14 +5,14 @@ const questionController = require("../controllers/qeustionController");
 // Create a question
 router.post("/", questionController.createQuestion);
 
-// Get questions by subject ID
-router.get("/subject/:subjectId", questionController.getQuestionsBySubject);
-
 // Get questions by subject ID with filter (year & season)
 router.get(
   "/filter/:subjectId",
   questionController.getQuestionsBySubjectAndFilter
 );
+
+// Get questions by subject ID
+router.get("/subject/:subjectId", questionController.getQuestionsBySubject);
 
 // Update question by ID
 router.put("/:id", questionController.updateQuestion);
