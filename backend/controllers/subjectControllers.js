@@ -1,18 +1,26 @@
 // controllers/subjectController.js
+
 const Subject = require("../models/subject");
 
 exports.createSubject = async (req, res) => {
-  try {
-    const newSubject = new Subject(req.body);
+  const { name, semester } = req.body;
 
-    console.log(subject);
+  try {
+    // Check for existing subject with same name under same semester
+    const existing = await Subject.findOne({
+      name: { $regex: new RegExp("^" + name + "$", "i") },
+      semester,
+    });
+
+    if (existing) {
+      return res.status(200).json(existing); // return existing
+    }
+
+    const newSubject = new Subject({ name, semester });
     await newSubject.save();
-    const populatedSubject = await Subject.findById(newSubject._id).populate("semester");
     res.status(201).json(newSubject);
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Error creating subject", error: err.message });
+    res.status(500).json({ error: "Server error" });
   }
 };
 

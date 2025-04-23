@@ -8,7 +8,7 @@ const questionSchema = new mongoose.Schema(
       required: true,
     },
     year: { type: Number, required: true },
-    season: { type: String, enum: ["spring", "Fall"], required: true }, // "Fall", "Spring"
+    season: { type: String, required: true }, // "Fall", "Spring"
     imageUrl: { type: String, required: true },
   },
   { timestamps: true }

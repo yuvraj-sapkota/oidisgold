@@ -4,8 +4,10 @@ import RightSideContent from "../Layout/HomePage/RightSideContent";
 const HomePage = () => {
   return (
     <>
-      <LeftSidebar />
-      <RightSideContent />
+      <div className="flex">
+        <LeftSidebar />
+        {/* <RightSideContent /> */}
+      </div>
     </>
   );
 };

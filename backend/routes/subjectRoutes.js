@@ -6,7 +6,7 @@ const subjectController = require("../controllers/subjectControllers");
 router.post("/", subjectController.createSubject);
 
 // Get subjects by semester ID
-router.get("/semester/:semesterId", subjectController.getSubjectsBySemester);
+router.get("/:semesterId", subjectController.getSubjectsBySemester);
 
 // Update subject by ID
 router.put("/:id", subjectController.updateSubject);
