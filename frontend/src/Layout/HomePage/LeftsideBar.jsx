@@ -3,10 +3,10 @@ import Logo from "../../components/Logo";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const LeftSidebar = () => {
-  // const sem = ["1st Semester", "2nd Semester", "3rd Semester", "4th Semester"];
+const LeftSidebar = ({ setActiveSemesterId }) => {
   const [sem, setSem] = useState([]);
   const [isSemester, setIsSemester] = useState(true);
+  const [activeSemester, SetActiveSemester] = useState();
 
   useEffect(() => {
     const fetchSemester = async () => {
@@ -21,11 +21,10 @@ const LeftSidebar = () => {
     fetchSemester();
   }, []);
 
-  const [activeSemester, SetActiveSemester] = useState();
-
   const knowSemester = (id) => {
     SetActiveSemester(id);
-    // console.log("active semester", id);
+    console.log("active semester", id);
+    setActiveSemesterId(id);
   };
 
   console.log("active semester", activeSemester);
@@ -46,12 +45,12 @@ const LeftSidebar = () => {
           <div className="mb-4">
             <div className="flex items-center justify-between p-2 ">
               <div
-                className="flex items-center gap-2 justify-center"
+                className="flex items-center gap-2 justify-center "
                 onClick={() => setIsSemester(!isSemester)}
               >
                 <ChevronDown
                   className={`w-4 h-4 cursor-pointer transition duration-200 ${
-                    isSemester ? " rotate-90" : "-rotate-100"
+                    isSemester ? "" : "-rotate-90"
                   }
                   }`}
                 />
@@ -60,12 +59,14 @@ const LeftSidebar = () => {
             </div>
             {/* all semester */}
             {isSemester && (
-              <div className="ml-6 space-y-1">
+              <div className="ml-6 space-y-2">
                 {sem.map((curElem) => (
                   <div
                     key={curElem._id}
-                    onClick={() => knowSemester(curElem.name)}
-                    className={`flex items-center justify-between p-2 bg-[#3D4D59] hover:bg-[#42515b] hover:scale-105 will-change-transform duration-200 transition rounded cursor-pointer  
+                    onClick={() => knowSemester(curElem._id)}
+                    className={`flex items-center justify-between p-2 bg-[#3D4D59] hover:bg-[#42515b] hover:scale-105 will-change-transform duration-200 transition rounded cursor-pointer   ${
+                      activeSemester == curElem._id ? "bg-customBlue scale-105" : ""
+                    }
                      
                     }`}
                   >

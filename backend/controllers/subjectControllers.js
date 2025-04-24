@@ -27,7 +27,9 @@ exports.createSubject = async (req, res) => {
 exports.getSubjectsBySemester = async (req, res) => {
   try {
     const { semesterId } = req.params;
-    const subjects = await Subject.find({ semester: semesterId });
+    const subjects = await Subject.find({ semester: semesterId }).populate(
+      "semester"
+    );
     res.status(200).json(subjects);
   } catch (err) {
     res
