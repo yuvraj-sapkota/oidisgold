@@ -8,10 +8,7 @@ const MiddleContent = ({ activeSemesterId }) => {
     activeSemesterId || localStorage.getItem("semesterId") || ""
   );
 
-  // const semesterId = activeSemesterId;
-
   useEffect(() => {
-    // Update semesterId if it changes from props
     if (activeSemesterId) {
       setSemesterId(activeSemesterId);
       localStorage.setItem("semesterId", activeSemesterId);
@@ -19,51 +16,53 @@ const MiddleContent = ({ activeSemesterId }) => {
   }, [activeSemesterId]);
 
   useEffect(() => {
-    // if (!activeSemesterId) return;
-
     const fetchSubject = async () => {
-      const subjectResponse = await axios.get(
-        `http://localhost:8000/api/subjects/${semesterId}`
-      );
-      setSubject(subjectResponse.data);
-      console.log(
-        "Subjects coming from backend aaaaaaaaaaaaa is ",
-        subjectResponse.data
-      );
+      try {
+        const subjectResponse = await axios.get(
+          `http://localhost:8000/api/subjects/${semesterId}`
+        );
+        setSubject(subjectResponse.data);
+      } catch (error) {
+        console.error("Error fetching subjects:", error);
+      }
     };
 
-    fetchSubject();
-    console.log("Subjects coming from backend is ", subject);
+    if (semesterId) {
+      fetchSubject();
+    }
   }, [semesterId]);
+
   return (
     <>
-      <main className="flex-1 overflow-auto ">
-        {semesterId ? (
-          <div className="m-4 text-2xl font-semibold text-center text-customBlue">
-            <p>Subjects of {"--"} Semester</p>
+      <main className="flex-1 overflow-auto px-4 md:px-8 py-6">
+        {semesterId && subject.length > 0 && (
+          <div className="text-xl sm:text-2xl font-semibold text-center text-customBlue mb-6">
+            <p>Subjects of {subject[0]?.semester?.name} Semester</p>
           </div>
-        ) : (
-          ""
         )}
-        <div className="max-w-3xl mx-auto ">
-          <div className="flex items-center gap-4 flex-wrap justify-center">
-            {subject.map((curElem, index) => {
-              return (
-                <Link
-                  to={`/displayquestions?subjectId=${
-                    curElem.subject_id
-                  }&semesterKey=${""}`}
-                  key={index}
-                >
-                  <div className="border border-gray-500 w-[280px] h-[160px] p-2 rounded-xl hover:shadow-lg hover:scale-105 duration-200">
-                    <h4 className="font-bold text-2xl text-center">
-                      {curElem.name}
-                    </h4>
-                    <button>open question</button>
+
+        <div className="max-w-6xl mx-auto">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+            {subject.map((curElem, index) => (
+              <Link
+                to={`/displayquestions?subjectId=${
+                  curElem.subject_id
+                }&semesterKey=${""}`}
+                key={index}
+                className="w-full sm:w-[280px]"
+              >
+                <div className="border border-gray-300 w-full h-40 p-4 rounded-xl shadow hover:shadow-lg hover:scale-105 transition-transform duration-200 bg-white">
+                  <h4 className="font-bold text-xl text-center mb-2">
+                    {curElem.name}
+                  </h4>
+                  <div className="flex justify-center">
+                    <button className="bg-customBlue text-white px-4 py-1 rounded hover:text-black transition-colors duration-200">
+                      Open Questions
+                    </button>
                   </div>
-                </Link>
-              );
-            })}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </main>
