@@ -41,30 +41,27 @@ const MiddleContent = ({ activeSemesterId }) => {
           </div>
         )}
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-            {subject.map((curElem, index) => (
-              <Link
-                to={`/displayquestions?subjectId=${
-                  curElem.subject_id
-                }&semesterKey=${""}`}
-                key={index}
-                className="w-full sm:w-[280px]"
-              >
-                <div className="border border-gray-300 w-full h-40 p-4 rounded-xl shadow hover:shadow-lg hover:scale-105 transition-transform duration-200 bg-white">
-                  <h4 className="font-bold text-xl text-center mb-2">
-                    {curElem.name}
-                  </h4>
-                  <div className="flex justify-center">
-                    <button className="bg-customBlue text-white px-4 py-1 rounded hover:text-black transition-colors duration-200">
-                      Open Questions
-                    </button>
-                  </div>
-                </div>
-              </Link>
-            ))}
+<div className="px-4 py-6 mx-auto max-w-7xl">
+  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {subject.map((curElem, index) => (
+      <Link
+        to={`/displayquestions?subjectId=${curElem.subject_id}&semesterKey=`}
+        key={index}
+        className="w-full"
+      >
+        <div className="border border-gray-300 h-40 p-4 rounded-xl shadow hover:shadow-lg hover:scale-105 transition-transform duration-200 bg-white flex flex-col justify-between">
+          <h4 className="font-bold text-xl text-center">{curElem.name}</h4>
+          <div className="flex justify-center">
+            <button className="bg-customBlue text-white px-4 py-1 rounded hover:text-black transition-colors duration-200">
+              Open Questions
+            </button>
           </div>
         </div>
+      </Link>
+    ))}
+  </div>
+</div>
+
       </main>
     </>
   );
