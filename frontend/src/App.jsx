@@ -9,6 +9,7 @@ import HeadingOIG from "./components/Logo";
 import Logout from "./pages/Logout";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
+import QuestionsPage from "./pages/Questionspage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="signup" element={<Signup />} />
             <Route path="home" element={<HomePage />} />
             <Route path="adminPage" element={<AdminPage />} />
+            <Route path="questions" element={<QuestionsPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
