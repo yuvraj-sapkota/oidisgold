@@ -85,7 +85,7 @@ const QuestionsPage = () => {
                     <TransformComponent>
                       <img
                         src={curElem.imageUrl}
-                        alt=""
+                        alt="questions"
                         className="w-full h-full object-fill cursor-grab active:cursor-grabbing"
                       />
                     </TransformComponent>
