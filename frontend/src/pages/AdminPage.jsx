@@ -7,49 +7,66 @@ const AdminPage = () => {
     subjectName: "",
     year: "",
     season: "",
-    imageUrl: "",
+    image: "",
   });
 
   const handleChange = (e) => {
-    setData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value, files } = e.target;
+    if (name === "photo") {
+      setData((prev) => ({ ...prev, image: files[0] }));
+    } else {
+      setData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    console.log(data);
 
-    const semesterRes = await axios.post(
-      "http://localhost:8000/api/semesters",
-      {
-        name: data.semester,
-      }
-    );
-    console.log("Response coming from backend", semesterRes);
+    try {
+      // First create the semester
+      const semesterRes = await axios.post(
+        "http://localhost:8000/api/semesters",
+        {
+          name: data.semester,
+        }
+      );
+      console.log("Response coming from backend", semesterRes);
+      const semesterId = semesterRes.data._id;
 
-    const semesterId = semesterRes.data._id;
+      // Create the subject
+      const subjectRes = await axios.post(
+        "http://localhost:8000/api/subjects",
+        {
+          name: data.subjectName,
+          semester: semesterId,
+        }
+      );
+      console.log("Subject name from backend", subjectRes);
+      const subjectId = subjectRes.data._id;
 
-    const subjectRes = await axios.post("http://localhost:8000/api/subjects", {
-      name: data.subjectName,
-      semester: semesterId,
-    });
-    console.log("subject name from backend ", subjectRes);
+      // Prepare the FormData object
+      const formData = new FormData();
+      formData.append("subject", subjectId);
+      formData.append("year", data.year);
+      formData.append("season", data.season);
+      formData.append("image", data.image);
 
-    const subjectId = subjectRes.data._id;
+      // Log FormData
+      formData.forEach((value, key) => {
+        console.log("form data is unique", key, value); // This will print the key and the value
+      });
 
-    const questionRes = await axios.post(
-      "http://localhost:8000/api/questions",
-      {
-        subject: subjectId,
-        year: data.year,
-        season: data.season,
-        imageUrl: data.imageUrl,
-      }
-    );
-    console.log("Question from the backend ", questionRes);
+      // Submit the question with FormData
+      const questionRes = await axios.post(
+        "http://localhost:8000/api/questions",
+        formData
+      );
+      console.log("Question from the backend", questionRes);
+    } catch (error) {
+      console.error("Error during submission:", error);
+    }
   };
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
       <form
@@ -97,11 +114,12 @@ const AdminPage = () => {
             onChange={handleChange}
           />
         </div>
+
         <div className="space-y-1">
           <label className="block text-gray-600 font-medium">Season</label>
           <input
             type="text"
-            placeholder="Enter year"
+            placeholder="Enter season"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             name="season"
             value={data.season}
@@ -110,13 +128,11 @@ const AdminPage = () => {
         </div>
 
         <div className="space-y-1">
-          <label className="block text-gray-600 font-medium">Image URL</label>
+          <label className="block text-gray-600 font-medium">Image</label>
           <input
-            type="text"
-            placeholder="Upload image URL"
+            type="file"
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="imageUrl"
-            value={data.imageUrl}
+            name="photo"
             onChange={handleChange}
           />
         </div>

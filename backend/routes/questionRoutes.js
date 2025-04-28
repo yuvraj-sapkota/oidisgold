@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const questionController = require("../controllers/qeustionController");
+const upload = require("../middlewares/uploadMiddleware");
 
 // Create a question
-router.post("/", questionController.createQuestion);
+router.post("/", upload.single("image"), questionController.createQuestion);
 
 // Get questions by subject ID with filter (year & season)
 router.get(
@@ -12,7 +13,7 @@ router.get(
 );
 
 // Get questions by subject ID
-router.get("/subject/:subjectId", questionController.getQuestionsBySubject);
+router.get("/:subjectId", questionController.getQuestionsBySubject);
 
 // Update question by ID
 router.put("/:id", questionController.updateQuestion);

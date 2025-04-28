@@ -3,10 +3,21 @@ const Question = require("../models/question");
 
 exports.createQuestion = async (req, res) => {
   try {
-    const newQuestion = new Question(req.body);
+    const { subject, year, season } = req.body;
+    if (!req.file) {
+      return res.status(400).json({ message: "No file upload" });
+    }
+    const photoPath = req.file.path;
+    const newQuestion = new Question({
+      subject,
+      year,
+      season,
+      image: photoPath,
+    });
     await newQuestion.save();
     res.status(201).json(newQuestion);
   } catch (err) {
+    console.log("Error while creting question", err);
     res
       .status(500)
       .json({ message: "Error creating question", error: err.message });
@@ -16,7 +27,10 @@ exports.createQuestion = async (req, res) => {
 exports.getQuestionsBySubject = async (req, res) => {
   try {
     const { subjectId } = req.params;
-    const questions = await Question.find(filters).populate("subject");
+
+    const questions = await Question.find({ subject: subjectId }).populate(
+      "subject"
+    );
 
     res.status(200).json(questions);
   } catch (err) {

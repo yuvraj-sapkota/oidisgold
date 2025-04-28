@@ -9,7 +9,7 @@ const questionSchema = new mongoose.Schema(
     },
     year: { type: Number, required: true },
     season: { type: String, required: true }, // "Fall", "Spring"
-    imageUrl: { type: String, required: true },
+    image: { type: String, required: true },
   },
   { timestamps: true }
 );
