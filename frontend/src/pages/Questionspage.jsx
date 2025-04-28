@@ -29,6 +29,8 @@ const QuestionsPage = () => {
     fetchQuestion();
   }, []);
 
+  
+
   return (
     <>
       {/* Top Bar */}
@@ -47,6 +49,7 @@ const QuestionsPage = () => {
               <p className="text-center text-base font-semibold mb-2">
                 {curElem.year} {curElem.season}
               </p>
+              
 
               {/* Image Container with Zoom */}
               <div className="w-full overflow-hidden rounded border border-gray-400 bg-black relative">
