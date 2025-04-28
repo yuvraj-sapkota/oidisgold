@@ -34,7 +34,7 @@ const QuestionsPage = () => {
       {/* Top Bar */}
       <div className="fixed mx-auto w-full  bg-customBlue rounded px-4 py-4 flex items-center justify-between z-50">
         <h1 className="text-white font-bold text-lg text-center w-full z-50">
-          Course: Web Technologies II
+          Course: Web Technologies I
         </h1>
       </div>
 
