@@ -7,7 +7,12 @@ exports.createQuestion = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ message: "No file upload" });
     }
-    const photoPath = req.file.path;
+    // const photoPath = req.file.path;
+
+    const photoPath = `${req.protocol}://${req.get(
+      "host"
+    )}/${req.file.path.replace(/\\/g, "/")}`;
+
     const newQuestion = new Question({
       subject,
       year,

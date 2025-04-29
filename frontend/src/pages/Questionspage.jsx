@@ -29,8 +29,6 @@ const QuestionsPage = () => {
     fetchQuestion();
   }, []);
 
-  
-
   return (
     <>
       {/* Top Bar */}
@@ -49,13 +47,12 @@ const QuestionsPage = () => {
               <p className="text-center text-base font-semibold mb-2">
                 {curElem.year} {curElem.season}
               </p>
-              
-
+             
               {/* Image Container with Zoom */}
               <div className="w-full overflow-hidden rounded border border-gray-400 bg-black relative">
                 <TransformWrapper
                   defaultScale={1}
-                  minScale={1}
+                  minScale={0.1}
                   maxScale={5}
                   wheel={{ disabled: true }}
                   panning={{ velocityDisabled: true }}

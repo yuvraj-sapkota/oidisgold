@@ -47,7 +47,7 @@ const MiddleContent = ({ activeSemesterId }) => {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {subject.map((curElem, index) => (
                 <Link
-                  to={`/questions?subjectId=${curElem._id}&semesterKey=`}
+                  to={`/questions?subjectId=${curElem._id}`}
                   key={index}
                   className="w-full"
                 >
