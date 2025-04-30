@@ -12,10 +12,16 @@ const QuestionsPage = () => {
   const [questionDetails, setQuestionDetails] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const fetchQuestion = async () => {
       try {
         const questionsResponse = await axios.get(
-          `http://localhost:8000/api/questions/${subjectId}`
+          `http://localhost:8000/api/questions/${subjectId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setQuestionDetails(questionsResponse.data);
         console.log(
@@ -47,7 +53,7 @@ const QuestionsPage = () => {
               <p className="text-center text-base font-semibold mb-2">
                 {curElem.year} {curElem.season}
               </p>
-             
+
               {/* Image Container with Zoom */}
               <div className="w-full overflow-hidden rounded border border-gray-400 bg-black relative">
                 <TransformWrapper

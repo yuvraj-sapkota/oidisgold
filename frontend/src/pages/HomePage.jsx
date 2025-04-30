@@ -2,10 +2,12 @@ import { useState } from "react";
 import LeftSidebar from "../Layout/HomePage/LeftsideBar";
 import RightSideContent from "../Layout/HomePage/RightSideContent";
 import { Menu } from "lucide-react"; // or use AiOutlineMenu from 'react-icons/ai'
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [activeSemesterId, setActiveSemesterId] = useState("");
   const [showSidebar, setShowSidebar] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -13,6 +15,7 @@ const HomePage = () => {
 
   const handleLogout = () => {
     localStorage.clear();
+    navigate("/");
   };
 
   return (

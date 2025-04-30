@@ -38,9 +38,8 @@ const Login = () => {
         setBackendLoginData(loginData.data);
         toast.success(loginData.data.message);
         navigate("/home");
-        localStorage.setItem("token", loginData.data.token)
+        localStorage.setItem("token", loginData.data.token);
       } catch (error) {
-        console.log(error.response?.data?.message);
         toast.error(error.response?.data?.message);
       }
     };

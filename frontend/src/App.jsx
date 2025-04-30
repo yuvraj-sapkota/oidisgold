@@ -12,16 +12,20 @@ import HomePage from "./pages/HomePage";
 import QuestionsPage from "./pages/Questionspage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./pages/ProtectedRoute";
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <ToastContainer />
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Logout />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
+          {/* these are the public routes */}
+          <Route path="/" element={<Logout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+
+          {/* these are the protected routes */}
+          <Route path="/" element={<ProtectedRoute />}>
             <Route path="home" element={<HomePage />} />
             <Route path="adminPage" element={<AdminPage />} />
             <Route path="questions" element={<QuestionsPage />} />

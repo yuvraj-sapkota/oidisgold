@@ -20,9 +20,11 @@ const LogoutHeader = () => {
               Log in
             </button>
           </Link>
-          <button className="text-white bg-[#12A4e2] hover:bg-[#35b2e8] border-2 py-2 px-4 rounded-lg text-lg font-semibold">
-            Sign up
-          </button>
+          <Link to="/signup">
+            <button className="text-white bg-[#12A4e2] hover:bg-[#35b2e8] border-2 py-2 px-4 rounded-lg text-lg font-semibold">
+              Sign up
+            </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Icon */}
