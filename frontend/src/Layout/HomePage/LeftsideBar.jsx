@@ -10,8 +10,16 @@ const LeftSidebar = ({ setActiveSemesterId }) => {
 
   useEffect(() => {
     const fetchSemester = async () => {
+      const token = localStorage.getItem("token");
       try {
-        const response = await axios.get("http://localhost:8000/api/semesters");
+        const response = await axios.get(
+          "http://localhost:8000/api/semesters",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setSem(response.data);
         console.log("Semester coming from backend is", response.data);
       } catch (error) {
@@ -65,7 +73,9 @@ const LeftSidebar = ({ setActiveSemesterId }) => {
                     key={curElem._id}
                     onClick={() => knowSemester(curElem._id)}
                     className={`flex items-center justify-between p-2 bg-[#3D4D59] hover:bg-[#42515b] hover:scale-105 will-change-transform duration-200 transition rounded cursor-pointer   ${
-                      activeSemester == curElem._id ? "bg-customBlue scale-105" : ""
+                      activeSemester == curElem._id
+                        ? "bg-customBlue scale-105"
+                        : ""
                     }
                      
                     }`}

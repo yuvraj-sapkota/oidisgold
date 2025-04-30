@@ -1,11 +1,13 @@
 import { Book, Mail, Lock } from "lucide-react";
 import HeadingOIG from "../components/Logo";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const navigate = useNavigate();
   const initialState = {
-    username: "",
     email: "",
     password: "",
   };
@@ -13,6 +15,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const [backendLoignData, setBackendLoginData] = useState([]);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -24,6 +28,23 @@ const Login = () => {
     console.log(authData);
     setAuthData(initialState);
     // api implementation here
+
+    const response = async () => {
+      try {
+        const loginData = await axios.post(
+          "http://localhost:8000/api/auth/login",
+          authData
+        );
+        setBackendLoginData(loginData.data);
+        toast.success(loginData.data.message);
+        navigate("/home");
+        localStorage.setItem("token", loginData.data.token)
+      } catch (error) {
+        console.log(error.response?.data?.message);
+        toast.error(error.response?.data?.message);
+      }
+    };
+    response();
   };
   return (
     <>

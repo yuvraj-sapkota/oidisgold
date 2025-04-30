@@ -1,18 +1,20 @@
 import { Book, Mail, Lock, User } from "lucide-react";
 import HeadingOIG from "../components/Logo";
 import { useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 const Signup = () => {
   const initialState = {
-    username: "",
+    name: "",
     email: "",
     password: "",
   };
   const [authData, setAuthData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
+  const [backendUserData, setbackendUserData] = useState([]);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -24,19 +26,20 @@ const Signup = () => {
     console.log(authData);
     setAuthData(initialState);
     // api implementation here
-    // try {
-    //   const response = await fetch("http://localhost:5000/signupData", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(authData),
-    //   });
-    //   const data = await response.json();
-    //   console.log("user added", data);
-    // } catch (error) {
-    //   console.log("Error adding user:", error);
-    // }
+    const response = async () => {
+      try {
+        const userData = await axios.post(
+          "http://localhost:8000/api/auth/signup",
+          authData
+        );
+        setbackendUserData(userData.data);
+        console.log("singup data coming from backend ", userData.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    response();
   };
   return (
     <>
@@ -64,8 +67,8 @@ const Signup = () => {
                   <User className="h-5 w-5 text-gray-400" />
                 </div>
                 <input
-                  name="username"
-                  value={authData.username}
+                  name="name"
+                  value={authData.name}
                   onChange={handleInput}
                   type="text"
                   required

@@ -10,11 +10,13 @@ import Logout from "./pages/Logout";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import QuestionsPage from "./pages/Questionspage";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   return (
     <>
       <BrowserRouter>
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Logout />} />

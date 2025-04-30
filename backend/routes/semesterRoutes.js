@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const semesterController = require("../controllers/semesterController");
+const authMiddleware = require("../middlewares/authMiddleware");
 
+router.use(authMiddleware);
 // Create a semester
 router.post("/", semesterController.createSemester);
 

@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const questionController = require("../controllers/qeustionController");
 const upload = require("../middlewares/uploadMiddleware");
+const authMiddleware = require("../middlewares/authMiddleware");
 
+router.use(authMiddleware);
 // Create a question
 router.post("/", upload.single("image"), questionController.createQuestion);
 

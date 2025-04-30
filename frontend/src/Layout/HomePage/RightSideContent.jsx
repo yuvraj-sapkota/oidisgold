@@ -16,10 +16,16 @@ const MiddleContent = ({ activeSemesterId }) => {
   }, [activeSemesterId]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const fetchSubject = async () => {
       try {
         const subjectResponse = await axios.get(
-          `http://localhost:8000/api/subjects/${semesterId}`
+          `http://localhost:8000/api/subjects/${semesterId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setSubject(subjectResponse.data);
         console.log("subject coming from backend is ", subjectResponse.data);
@@ -68,7 +74,9 @@ const MiddleContent = ({ activeSemesterId }) => {
         </main>
       ) : (
         <div>
-          <h1 className="text-center font-bold text-6xl mt-4 tracking-tight h-screen flex justify-center items-center">Please select <br /> your semester</h1>
+          <h1 className="text-center font-bold text-6xl mt-4 tracking-tight h-screen flex justify-center items-center">
+            Please select <br /> your semester
+          </h1>
         </div>
       )}
     </>

@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const subjectController = require("../controllers/subjectControllers");
+const authMiddleware = require("../middlewares/authMiddleware");
 
+router.use(authMiddleware);
 // Create a subject
 router.post("/", subjectController.createSubject);
 
