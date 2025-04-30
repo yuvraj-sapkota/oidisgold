@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const HomePage = () => {
   const [activeSemesterId, setActiveSemesterId] = useState("");
   const [showSidebar, setShowSidebar] = useState(false);
+
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
@@ -48,10 +49,10 @@ const HomePage = () => {
         {/* Right Content */}
         <div className="flex-1 mt-10 md:mt-0  ml-0 md:ml-0">
           <div className="bg-customBlue w-full p-2  flex items-center justify-between">
-            <p className="font-bold text-white text-xl">Welcome Yuvraj</p>
+            <p className="font-bold text-white text-xl">Welcome username</p>
             <button
               onClick={handleLogout}
-              className="bg-white  rounded-full px-2 py-1"
+              className="bg-white  rounded-full px-2 py-1 cursor-pointer hover:scale-90  hover:transition-all"
             >
               Log out
             </button>
