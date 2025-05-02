@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ReactTyped } from "react-typed";
 const LogoutContent = () => {
   return (
@@ -33,9 +34,11 @@ const LogoutContent = () => {
             </div>
           </div>
           <div className="text-center">
-            <button className="px-6 sm:px-12 md:px-16 py-2 bg-customBlue text-white font-bold rounded-lg mt-8">
-              Get Started
-            </button>
+            <Link to="/login">
+              <button className="px-6 sm:px-12 md:px-16 py-2 bg-customBlue text-white font-bold rounded-lg mt-8 cursor-pointer hover:scale-105 transition">
+                Get Started
+              </button>
+            </Link>
           </div>
         </div>
       </div>
